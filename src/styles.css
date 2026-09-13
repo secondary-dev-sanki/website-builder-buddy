@@ -1,6 +1,10 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+/* Original Creionescu Webflow design system — keep after Tailwind so it wins. */
+@import "./styles/normalize.css";
+@import "./styles/webflow.css";
+@import "./styles/creionescu.webflow.css";
 
 @custom-variant dark (&:is(.dark *));
 
