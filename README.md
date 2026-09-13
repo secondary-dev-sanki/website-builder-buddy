@@ -1,29 +1,42 @@
-# Welcome to your Lovable project
+# Creionescu Website
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+A modern website built with [Lovable](https://lovable.dev) on the TanStack Start stack.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+This project uses `bun`. Make sure you have it installed, then run:
 
 ```sh
 git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+cd creionescu-website
+bun install
+bun dev
 ```
 
-## Built with
+Other useful commands:
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+```sh
+bun run build    # Create a production build
+bun run preview  # Preview the production build locally
+bun run lint     # Run ESLint
+bun run format   # Format files with Prettier
+```
+
+## Brand assets
+
+Brand assets (logo, colors, fonts, and any reference material) should be added to the repository once they are ready. Typical locations:
+
+- `public/` — static assets such as logos, favicons, and images.
+- `src/styles.css` — design tokens and theme colors.
+- `src/assets/` — additional images or icons used by components.
+
+## Tech stack
+
+- [TanStack Start](https://tanstack.com/start)
+- [React](https://react.dev)
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS v4](https://tailwindcss.com)
+
+## License
+
+This project is private and owned by Creionescu.
