@@ -12,11 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
+import { Route as OrderOrderNumberRouteImport } from './routes/order.$orderNumber'
+import { Route as PaymentReturnRouteImport } from './routes/payment.return'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as ApiPublicNetopiaIpnRouteImport } from './routes/api/public/netopia/ipn'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -31,6 +35,11 @@ const BlogRoute = BlogRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,9 +62,24 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
   path: '/category/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrderOrderNumberRoute = OrderOrderNumberRouteImport.update({
+  id: '/order/$orderNumber',
+  path: '/order/$orderNumber',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentReturnRoute = PaymentReturnRouteImport.update({
+  id: '/payment/return',
+  path: '/payment/return',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicNetopiaIpnRoute = ApiPublicNetopiaIpnRouteImport.update({
+  id: '/api/public/netopia/ipn',
+  path: '/api/public/netopia/ipn',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -63,32 +87,44 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/order/$orderNumber': typeof OrderOrderNumberRoute
+  '/payment/return': typeof PaymentReturnRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/netopia/ipn': typeof ApiPublicNetopiaIpnRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/order/$orderNumber': typeof OrderOrderNumberRoute
+  '/payment/return': typeof PaymentReturnRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/netopia/ipn': typeof ApiPublicNetopiaIpnRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/services': typeof ServicesRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/order/$orderNumber': typeof OrderOrderNumberRoute
+  '/payment/return': typeof PaymentReturnRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/api/public/netopia/ipn': typeof ApiPublicNetopiaIpnRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,42 +132,58 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/products'
     | '/services'
     | '/category/$slug'
+    | '/order/$orderNumber'
+    | '/payment/return'
     | '/product/$slug'
+    | '/api/public/netopia/ipn'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blog'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/products'
     | '/services'
     | '/category/$slug'
+    | '/order/$orderNumber'
+    | '/payment/return'
     | '/product/$slug'
+    | '/api/public/netopia/ipn'
   id:
     | '__root__'
     | '/'
     | '/blog'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/products'
     | '/services'
     | '/category/$slug'
+    | '/order/$orderNumber'
+    | '/payment/return'
     | '/product/$slug'
+    | '/api/public/netopia/ipn'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   ProductsRoute: typeof ProductsRoute
   ServicesRoute: typeof ServicesRoute
   CategorySlugRoute: typeof CategorySlugRoute
+  OrderOrderNumberRoute: typeof OrderOrderNumberRoute
+  PaymentReturnRoute: typeof PaymentReturnRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  ApiPublicNetopiaIpnRoute: typeof ApiPublicNetopiaIpnRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -185,11 +244,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategorySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/order/$orderNumber': {
+      id: '/order/$orderNumber'
+      path: '/order/$orderNumber'
+      fullPath: '/order/$orderNumber'
+      preLoaderRoute: typeof OrderOrderNumberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment/return': {
+      id: '/payment/return'
+      path: '/payment/return'
+      fullPath: '/payment/return'
+      preLoaderRoute: typeof PaymentReturnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$slug': {
       id: '/product/$slug'
       path: '/product/$slug'
       fullPath: '/product/$slug'
       preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/netopia/ipn': {
+      id: '/api/public/netopia/ipn'
+      path: '/api/public/netopia/ipn'
+      fullPath: '/api/public/netopia/ipn'
+      preLoaderRoute: typeof ApiPublicNetopiaIpnRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -199,11 +279,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   ProductsRoute: ProductsRoute,
   ServicesRoute: ServicesRoute,
   CategorySlugRoute: CategorySlugRoute,
+  OrderOrderNumberRoute: OrderOrderNumberRoute,
+  PaymentReturnRoute: PaymentReturnRoute,
   ProductSlugRoute: ProductSlugRoute,
+  ApiPublicNetopiaIpnRoute: ApiPublicNetopiaIpnRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

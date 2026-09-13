@@ -64,9 +64,9 @@ export const createOrderAndStartPayment = createServerFn({ method: "POST" })
     const shippingCents = SHIPPING_FLAT_CENTS;
     const totalCents = subtotalCents + shippingCents;
 
-    const { data: numberRow, error: numberError } = await supabaseAdmin.rpc("next_order_number");
-    const orderNumber =
-      !numberError && numberRow ? String(numberRow) : `CRN-${Date.now().toString(36).toUpperCase()}`;
+    const orderNumber = `CRN-${Date.now().toString(36).toUpperCase()}-${Math.floor(Math.random() * 1000)
+      .toString()
+      .padStart(3, "0")}`;
 
     const { data: order, error: orderError } = await supabaseAdmin
       .from("orders")
