@@ -16,11 +16,12 @@ const productQuery = (slug: string) =>
 export const Route = createFileRoute("/product/$slug")({
   loader: async ({ context, params }) => {
     const result = await context.queryClient.ensureQueryData(productQuery(params.slug));
-    if (!result) throw notFound();
+    const found = result?.product;
+    if (!found) throw notFound();
     return {
-      name: result.product.name,
-      description: result.product.shortDescription ?? result.product.description,
-      image: result.product.images[0]?.url ?? null,
+      name: found.name,
+      description: found.shortDescription ?? found.description,
+      image: found.images[0]?.url ?? null,
     };
   },
   head: ({ loaderData, params }) => {
@@ -55,17 +56,18 @@ export const Route = createFileRoute("/product/$slug")({
 function ProductPage() {
   const { slug } = Route.useParams();
   const { data } = useSuspenseQuery(productQuery(slug));
-  const { addItem } = useCart();
+  const { add } = useCart();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
 
-  if (!data) return null;
-  const { product, related } = data;
+  const product = data?.product;
+  const related = data?.related ?? [];
+  if (!product) return null;
   const image = product.images[0];
 
-  const add = () => {
-    addItem(
+  const addToCart = () => {
+    add(
       {
         productId: product.id,
         slug: product.slug,
@@ -107,7 +109,7 @@ function ProductPage() {
                     className="w-commerce-commerceaddtocartform"
                     onSubmit={(event) => {
                       event.preventDefault();
-                      add();
+                      addToCart();
                       setAdded(true);
                     }}
                   >
@@ -133,7 +135,7 @@ function ProductPage() {
                         type="button"
                         className="w-commerce-commercebuynowbutton secondary-button"
                         onClick={() => {
-                          add();
+                          addToCart();
                           navigate({ to: "/checkout" });
                         }}
                       >

@@ -1,3 +1,4 @@
+export const SITE_URL = "https://id-preview--99735f2b-0f22-4f55-8a15-501b0ed40ca8.lovable.app";
 export const SITE_NAME = "Creionescu";
 export const SITE_TAGLINE = "Custom polystyrene decorations and interior design";
 export const SHIPPING_FLAT_CENTS = 2500; // 25 lei flat delivery fee per order

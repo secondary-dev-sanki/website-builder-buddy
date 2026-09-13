@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCart } from "@/lib/cart";
+import { useCart, type CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { SHIPPING_FLAT_CENTS } from "@/lib/site";
 
@@ -23,14 +23,14 @@ export const Route = createFileRoute("/cart")({
 });
 
 function CartPage() {
-  const { items, hydrated, setQuantity, removeItem, subtotalCents } = useCart();
+  const { lines, hydrated, setQuantity, remove, subtotalCents } = useCart();
 
   return (
     <section className="section section-produtcs-hero">
       <div className="w-layout-blockcontainer container w-container">
         <h1 className="heading-h2 margin-bottom-32">Your cart</h1>
 
-        {!hydrated ? null : items.length === 0 ? (
+        {!hydrated ? null : lines.length === 0 ? (
           <div>
             <p className="paragraph-20">Your cart is empty.</p>
             <Link to="/products" className="primary-button w-button">
@@ -39,7 +39,7 @@ function CartPage() {
           </div>
         ) : (
           <>
-            {items.map((line) => (
+            {lines.map((line: CartLine) => (
               <div className="w-commerce-commercecartitem" key={line.productId}>
                 {line.imageUrl ? (
                   <img
@@ -57,7 +57,7 @@ function CartPage() {
                     type="button"
                     className="w-commerce-commercecartoptionlist"
                     style={{ background: "none", border: "none", padding: 0, cursor: "pointer", textDecoration: "underline" }}
-                    onClick={() => removeItem(line.productId)}
+                    onClick={() => remove(line.productId)}
                   >
                     Remove
                   </button>
