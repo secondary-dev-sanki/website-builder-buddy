@@ -75,7 +75,6 @@ export function SiteNav() {
               </div>
               <nav
                 className={`nav_dropdown-list w-dropdown-list ${shopOpen ? "w--open" : ""}`}
-                style={shopOpen ? { display: "block" } : undefined}
               >
                 <div className="nav_grid-dropdown-grid">
                   <Link
