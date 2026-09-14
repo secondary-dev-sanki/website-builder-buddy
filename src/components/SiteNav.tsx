@@ -6,6 +6,15 @@ export function SiteNav() {
   const { count, hydrated } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [canHover, setCanHover] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(hover: hover) and (min-width: 992px)");
+    const update = () => setCanHover(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -49,8 +58,8 @@ export function SiteNav() {
           <div className="nav-inner-container">
             <div
               className={`nav-dropdown w-dropdown ${shopOpen ? "w--open" : ""}`}
-              onMouseEnter={() => setShopOpen(true)}
-              onMouseLeave={() => setShopOpen(false)}
+              onMouseEnter={canHover ? () => setShopOpen(true) : undefined}
+              onMouseLeave={canHover ? () => setShopOpen(false) : undefined}
             >
               <div
                 className={`nav-link nav-link-dropdown w-dropdown-toggle ${shopOpen ? "w--open" : ""}`}
@@ -66,7 +75,6 @@ export function SiteNav() {
               </div>
               <nav
                 className={`nav_dropdown-list w-dropdown-list ${shopOpen ? "w--open" : ""}`}
-                style={shopOpen ? { display: "block" } : undefined}
               >
                 <div className="nav_grid-dropdown-grid">
                   <Link
@@ -138,7 +146,7 @@ export function SiteNav() {
               </g>
             </svg>
             <div className="cart-text w-inline-block">Cart</div>
-            <div className="cart-quantity" aria-live="polite">
+            <div className="w-commerce-commercecartopenlinkcount cart-quantity" aria-live="polite">
               {hydrated ? count : 0}
             </div>
           </Link>
