@@ -146,7 +146,7 @@ export function SiteNav() {
               </g>
             </svg>
             <div className="cart-text w-inline-block">Cart</div>
-            <div className="cart-quantity" aria-live="polite">
+            <div className="w-commerce-commercecartopenlinkcount cart-quantity" aria-live="polite">
               {hydrated ? count : 0}
             </div>
           </Link>
