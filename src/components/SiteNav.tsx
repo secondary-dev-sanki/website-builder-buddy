@@ -58,8 +58,8 @@ export function SiteNav() {
           <div className="nav-inner-container">
             <div
               className={`nav-dropdown w-dropdown ${shopOpen ? "w--open" : ""}`}
-              onMouseEnter={() => setShopOpen(true)}
-              onMouseLeave={() => setShopOpen(false)}
+              onMouseEnter={canHover ? () => setShopOpen(true) : undefined}
+              onMouseLeave={canHover ? () => setShopOpen(false) : undefined}
             >
               <div
                 className={`nav-link nav-link-dropdown w-dropdown-toggle ${shopOpen ? "w--open" : ""}`}
