@@ -146,3 +146,43 @@
     color: var(--color-foreground);
   }
 }
+
+/* Header polish: keep the fixed bar readable and evenly spaced on small screens. */
+@media screen and (max-width: 991px) {
+  .nav-bar {
+    min-height: 5rem;
+    background-color: var(--brand--neutrals--tan-light);
+    border-bottom: 1px solid var(--brand--neutrals--grey-mid);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+
+  .container.navigation-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    align-items: center;
+  }
+
+  .nav-logo {
+    max-height: 3rem;
+  }
+
+  .card-wrapper {
+    align-items: center;
+    display: flex;
+  }
+
+  .primary-button.primary-button-cart {
+    height: 3rem;
+    padding: 0 0.9rem;
+    align-items: center;
+    border-radius: 3rem;
+  }
+
+  .navha-hamburger-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+  }
+}
